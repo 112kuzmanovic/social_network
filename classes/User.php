@@ -4,6 +4,11 @@ class User extends QueryBuilder {
     public $register_result = NULL;
     public $userExist = NULL;
     public $loggedUser = NULL;
+    
+
+
+
+
     public function registerUser(){
         $name = $_POST['register_name'];
         $email = $_POST['register_email'];
@@ -30,6 +35,7 @@ class User extends QueryBuilder {
     }
 
     public function logUser(){
+        
         $email=$_POST['login_email'];
         $password = $_POST['login_password'];
 
@@ -109,6 +115,8 @@ header("Refresh:0");
         $result = $query->fetch(PDO::FETCH_OBJ);
         return $result;
     }
+
+   
     
 
 }
