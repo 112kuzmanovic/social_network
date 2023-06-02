@@ -13,7 +13,8 @@ class User extends QueryBuilder {
         $name = $_POST['register_name'];
         $email = $_POST['register_email'];
         $password = $_POST['register_password'];
-
+        $surname=$_POST['register_surname'];
+        
 
         $sql1 = "SELECT * FROM users WHERE email=?";
         $query1 = $this->db->prepare($sql1);
@@ -21,9 +22,9 @@ class User extends QueryBuilder {
         $result = $query1->fetch(PDO::FETCH_OBJ);
         
         if($result==false){
-            $sql = "INSERT INTO users VALUES (NULL,?,?,?)";
+            $sql = "INSERT INTO users VALUES (NULL,?,?,?,?) INSERT INTO";
             $query = $this->db->prepare($sql);
-            $query->execute([$name,$email,$password]);
+            $query->execute([$name,$surname,$email,$password]);
             $this->register_result = true;
         }else{
             $this->userExist = true;   
@@ -52,7 +53,7 @@ class User extends QueryBuilder {
     }
 
     public function getUserWithId($id){
-        $sql = "SELECT * FROM users  WHERE users.users_id=?";
+        $sql = "SELECT * FROM users WHERE users.users_id=?";
         $query = $this->db->prepare($sql);
         $query->execute([$id]);
 
@@ -65,7 +66,8 @@ class User extends QueryBuilder {
     public function insertProfileImage(){
         $image_file = $_FILES["image"];
         $id=$_SESSION['loggedUser']->users_id;
-
+        
+        
 
 
 if (!isset($image_file)) {
@@ -96,20 +98,26 @@ move_uploaded_file(
 
     
     __DIR__ . "/images/" . $image_name
-);  
-$sql="UPDATE profil_image SET current_img='' WHERE profil_image.user_id=$id";
-$query = $this->db->prepare($sql);
-$query->execute([]);
+);
+$sql2="SELECT * FROM profil_image WHERE profil_image.user_id=?";
+$query2 = $this->db->prepare($sql2);
+$query2->execute([$id]);
+$result2 = $query2->fetch(PDO::FETCH_OBJ);
+if($result2!=NULL){
+    $sql="DELETE FROM profil_image WHERE profil_image.user_id=?";
+    $query = $this->db->prepare($sql);
+    $query->execute([$id]);
+}
 
-$sql1="INSERT INTO profil_image VALUES(NULL,?,?,NOW(),?)";
+$sql1="INSERT INTO profil_image VALUES(NULL,?,?)";
 $query = $this->db->prepare($sql1);
-$query->execute([$id,$image_name,$image_name]);
+$query->execute([$id,$image_name]);
 header("Refresh:0");
     }
 
 
     public function selectProfileImage($id){
-        $sql = "SELECT * FROM profil_image WHERE profil_image.user_id=? ORDER BY insert_time DESC LIMIT 1";
+        $sql = "SELECT * FROM profil_image WHERE profil_image.user_id=?";
         $query = $this->db->prepare($sql);
         $query->execute([$id]);
         $result = $query->fetch(PDO::FETCH_OBJ);

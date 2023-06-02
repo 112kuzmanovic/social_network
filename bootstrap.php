@@ -22,6 +22,8 @@ $img=new User($db);
 $post = new Post($db);
 
 $profil = new Profil($db);
+$profil1 = new Profil($db);
+
 
 function test($test){
     echo "<pre>";

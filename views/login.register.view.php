@@ -39,6 +39,7 @@
                 <input type="text" name="register_surname" placeholder="surname" class="form-control"  required><br>
                 <input type="email" name="register_email" placeholder="email" class="form-control" required><br>
                 <input type="password" name="register_password" placeholder="password" class="form-control" required><br>
+                
                 <button class="btn btn-warning form-control"name="registerBtn">Register</button>
 
 

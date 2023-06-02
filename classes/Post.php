@@ -13,9 +13,18 @@ class Post extends QueryBuilder {
     }
 
     public function selectAllPosts(){
-        $sql = "SELECT * FROM posts INNER JOIN users ON users.users_id=posts.user_id INNER JOIN profil_image ON profil_image.user_id=posts.user_id WHERE profil_image.current_img !=''";
+        $sql = "SELECT * FROM posts INNER JOIN users ON users.users_id=posts.user_id INNER JOIN profil_image ON profil_image.user_id=posts.user_id ORDER BY posts.time_of_posts DESC";
         $query = $this->db->prepare($sql);
         $query->execute([]);
+        $result = $query->fetchAll(PDO::FETCH_OBJ);
+        return $result;
+    }
+
+
+    public function allPostsFromUser($id){
+        $sql='SELECT * FROM posts INNER JOIN users ON users.users_id=posts.user_id WHERE posts.user_id=?';
+        $query = $this->db->prepare($sql);
+        $query->execute([$id]);
         $result = $query->fetchAll(PDO::FETCH_OBJ);
         return $result;
     }

@@ -2,6 +2,7 @@
 <?php
 if(isset($_SESSION['loggedUser'])){
     $requests = $profil->viewRequest(); 
+    
 }
 ?>
 <nav class="navbar navbar-expand navbar-dark bg-dark">
@@ -36,8 +37,8 @@ if(isset($_SESSION['loggedUser'])){
       <div class="modal-body">
         <?php foreach($requests as $request): ?>
             <form action="acceptRefuse.php"method="POST">
-                <input type="hidden" name="frendRequest"value="<?php echo $request->name.' '.$request->surname ?>">
-                <p><b><?php echo $request->name.' '.$request->surname ?></b></p>
+                <input type="hidden" name="friendRequest"value="<?php echo $request->sender_id ?>">
+                <a href="profil.php?id=<?php echo $request->sender_id ?>"><b><?php echo $request->name.' '.$request->surname ?></b></a>
                 <button name="accept" type="submit" class="btn btn-success btn-sm">Accept</button>
             </form>
         <?php endforeach ?>
