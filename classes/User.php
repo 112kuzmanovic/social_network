@@ -5,6 +5,7 @@ class User extends QueryBuilder {
     public $userExist = NULL;
     public $loggedUser = NULL;
     
+    
 
 
 
@@ -22,7 +23,7 @@ class User extends QueryBuilder {
         $result = $query1->fetch(PDO::FETCH_OBJ);
         
         if($result==false){
-            $sql = "INSERT INTO users VALUES (NULL,?,?,?,?) INSERT INTO";
+            $sql = "INSERT INTO users VALUES (NULL,?,?,?,?)";
             $query = $this->db->prepare($sql);
             $query->execute([$name,$surname,$email,$password]);
             $this->register_result = true;

@@ -1,6 +1,6 @@
 <?php require_once "bootstrap.php" ?>
 <?php require_once "views/partials/navbar.php" ?>
-<?php if(isset($_GET['id'])):?>
+<?php if(isset($_GET['id']) && isset($_SESSION['loggedUser'])):?>
   <?php
   $idLogged=$_SESSION['loggedUser']->users_id;
   $id=$_GET['id'];
@@ -41,6 +41,8 @@
 </div><br>
     <?php endif ?>
 <?php endforeach ?>
+<?php else: ?>
+    <?php require_once "index.php"; ?>
 <?php endif ?>
 
 

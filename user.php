@@ -1,14 +1,12 @@
 <?php require_once "bootstrap.php";?>
 <?php require_once "views/partials/navbar.php" ?>
-<?php if(isset($_SESSION['loggedUser'])){
+<?php if(isset($_SESSION['loggedUser'])):
   $id=$_SESSION['loggedUser']->users_id;
-} ?>
-<?php $user=$user->getUserWithId($id) ?>
+?>
+  <?php $user=$user->getUserWithId($id) ?>
 <?php $profil_image=$profil_image->selectProfileImage($id) ?>
 <?php $following = $profil->following($id); ?>
 <?php $followers = $profil->followers($id) ?>
-
-
 
 
 <div class="jumbotron">
@@ -55,8 +53,8 @@
 <div class="container">
   <div class="row">
     <div class="col-8 offset-2">
-      <a href="following.php?id=<?php echo $id ?>" class="btn btn-outline-primary float-left"><i>Following:(<?php echo count($following); ?>)</i></a>
-      <a href="followers.php?id=<?php echo $id ?>" class="btn btn-outline-primary float-right"><i>Followers:(<?php echo count($followers); ?>)</i></a><br><br>
+      <a href="following.php?id=<?php echo $id ?>" class="btn btn-outline-danger float-left"><i>Following:(<?php echo count($following); ?>)</i></a>
+      <a href="followers.php?id=<?php echo $id ?>" class="btn btn-outline-danger float-right"><i>Followers:(<?php echo count($followers); ?>)</i></a><br><br>
       
       <?php if($posts!=NULL): ?>
         <?php foreach($posts as $post): ?>
@@ -69,10 +67,13 @@
             <div class="card-body">
             <p><i><?php echo $post->posts ?></i></p>
             </div>
-          </div>
+          </div><br>
         <?php endforeach ?>
       <?php endif ?>
 
     </div>
   </div>
 </div>
+<?php else :?>
+  <?php  require_once "index.php"; ?>
+<?php endif ?>
