@@ -14,21 +14,26 @@
         <div class="profileImg"><img style="width:200px;height:200px;border-radius:50%" class="float-left" src="classes/images/<?php if($profil_image==null){echo 'no-image-icon-0.png';}else{echo $profil_image->image ;} ?>" alt=""></div>
         <h4 class="float-right"><?php echo $user[0]->name.' '.$user[0]->surname ?></h4><br><br>
         <p class="float-right"><?php echo $user[0]->email ?></p>
-        <form action="insertImage.php"method="POST" enctype = "multipart/form-data">
             
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Update Profile Image
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+  Change profile image
 </button>
 
-
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Choose image</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Upload profile image</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
+      </div>
+      <div class="modal-body">
+      <form action="insertImage.php"method="POST" enctype = "multipart/form-data">
+        <h5 class="modal-title" id="exampleModalLabel">Choose image</h5>
+        
       </div>
       <div class="modal-body">
       <input type="file" name="image" value="" />
@@ -36,14 +41,22 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button name="insertProfileImg" type="submit" class="btn btn-primary">Upload </button>
+  
+
+        </form>
+
       </div>
+      
     </div>
   </div>
 </div>
-        </form>
+
+       
 
     </div>
+    
 </div>
+
 <?php require_once "views/add_post.view.php" ?>
 
 
@@ -77,3 +90,7 @@
 <?php else :?>
   <?php  require_once "index.php"; ?>
 <?php endif ?>
+
+
+
+        

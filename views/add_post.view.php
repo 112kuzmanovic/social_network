@@ -6,5 +6,8 @@
   </div>
 </div>
 </form>
-<a href=""><i style="margin-left:57%;" class="fa fa-picture-o" aria-hidden="true"></i></a>
-<a href=""><i class="fa fa-video-camera" aria-hidden="true"></i></a>
+
+
+
+
+
